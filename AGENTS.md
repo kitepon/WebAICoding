@@ -1,6 +1,6 @@
 # AGENTS.md
 
-このファイルは本プロジェクトでClaude CodeとCodexが共有する正典である。`CLAUDE.md`はこのファイルを読み込む。
+このファイルは本プロジェクトでClaude CodeとCodexが共有する正典である。
 
 ## Project
 
