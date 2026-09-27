@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../../../blog-figmaker/brand.css">
+  <style>
+    .fig { width: 650px; padding: 32px 34px 36px; }
+    h2 { font-size: 26px; margin: 7px 0 22px; }
+    .path { display: grid; grid-template-columns: 205px 26px 1fr; align-items: center; gap: 10px; margin-top: 13px; }
+    .node { min-height: 84px; display: flex; flex-direction: column; justify-content: center; }
+    .node b { font-size: 17px; line-height: 1.4; }
+    .node small { color: var(--ink-soft); margin-top: 5px; font-size: 13px; }
+    .node.finish { background: var(--paper-2); border-color: var(--coral); }
+    .arrow { font-size: 23px; }
+    .note { margin-top: 19px; font-size: 13px; line-height: 1.6; color: var(--ink-soft); }
+  </style>
+</head>
+<body>
+  <div class="fig" id="fig">
+    <div class="kicker">JEV BOOKMARKS</div>
+    <h2>目的のページを開くとき</h2>
+    <div class="path">
+      <div class="node"><b>保存済みページ</b><small>プロジェクトの電話帳</small></div>
+      <div class="arrow">→</div>
+      <div class="node finish"><b>そのURLから始める</b><small>Jevが必要な操作をする</small></div>
+    </div>
+    <div class="path">
+      <div class="node"><b>履歴に候補がある</b><small>普段使うChrome</small></div>
+      <div class="arrow">→</div>
+      <div class="node finish"><b>JevがURLを選ぶ</b><small>そこからブラウザを操作する</small></div>
+    </div>
+    <div class="path">
+      <div class="node"><b>入口が見つからない</b></div>
+      <div class="arrow">→</div>
+      <div class="node finish"><b>「入口なし」と返す</b><small>AIが続けてJevで探す</small></div>
+    </div>
+    <div class="note">役立った到達先は、次回のためにプロジェクトの電話帳へ保存する。</div>
+  </div>
+</body>
+</html>
