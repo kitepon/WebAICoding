@@ -163,11 +163,11 @@
     "canonicalUrl": "https://kitepon.dev/blog/post/dns-blindspot/"
   },
   "jev-bookmarks": {
-    "status": "posting",
-    "sourceKey": "jev-bookmarks",
+    "status": "published",
+    "url": "https://dev.to/quolu/jev-was-fast-so-i-made-it-open-target-pages-from-chrome-history-5hk2",
+    "id": 4774755,
     "canonicalUrl": "https://kitepon.dev/blog/post/jev-bookmarks/",
-    "reservationToken": "36660960166:1",
-    "reservedAt": "2026-09-30T02:41:18.799Z"
+    "pending": []
   },
   "kikoeru-listening": {
     "status": "published",
