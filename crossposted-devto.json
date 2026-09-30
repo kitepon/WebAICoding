@@ -162,6 +162,13 @@
     "pending": [],
     "canonicalUrl": "https://kitepon.dev/blog/post/dns-blindspot/"
   },
+  "jev-bookmarks": {
+    "status": "posting",
+    "sourceKey": "jev-bookmarks",
+    "canonicalUrl": "https://kitepon.dev/blog/post/jev-bookmarks/",
+    "reservationToken": "36660960166:1",
+    "reservedAt": "2026-09-30T02:41:18.799Z"
+  },
   "kikoeru-listening": {
     "status": "published",
     "url": "https://dev.to/quolu/i-can-read-english-but-i-cant-hear-it-how-i-realized-ai-makes-unlimited-learning-materials-and-2fh7",
