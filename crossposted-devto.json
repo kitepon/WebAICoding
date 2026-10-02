@@ -210,6 +210,13 @@
     "pending": [],
     "canonicalUrl": "https://kitepon.dev/blog/post/livetr-app/"
   },
+  "livetr-v2-release": {
+    "status": "posting",
+    "sourceKey": "livetr-v2-release",
+    "canonicalUrl": "https://kitepon.dev/blog/post/livetr-v2-release/",
+    "reservationToken": "36957403300:1",
+    "reservedAt": "2026-10-02T02:49:50.735Z"
+  },
   "oltranslator-app": {
     "url": "https://dev.to/quolu/oltranslator-a-real-time-screen-translation-app-for-windows-1l52",
     "id": 3736536,
