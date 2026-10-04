@@ -224,11 +224,11 @@
     "canonicalUrl": "https://kitepon.dev/blog/post/oltranslator-app/"
   },
   "peertable-round-table": {
-    "status": "posting",
-    "sourceKey": "peertable-round-table",
+    "status": "published",
+    "url": "https://dev.to/quolu/if-theyre-all-similar-minds-why-not-a-roundtable-so-i-built-one-52m5",
+    "id": 4794168,
     "canonicalUrl": "https://kitepon.dev/blog/post/peertable/",
-    "reservationToken": "37173131501:1",
-    "reservedAt": "2026-10-04T03:07:21.343Z"
+    "pending": []
   },
   "pi5-server-monitor": {
     "url": "https://dev.to/quolu/built-a-raspberry-pi-5-server-monitor-for-power-efficiency-and-turned-it-into-a-video-player-16bi",
