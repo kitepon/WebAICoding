@@ -8,7 +8,7 @@
 - URL: `https://kitepon.dev/blog/`
 - 旧URL: `https://blog.kitepon.dev/`（Cloudflareで新URLへ301）
 - SSG: Hugo extended 0.164.0（`Dockerfile`と`.github/workflows/validate.yml`で同じ版を使う）
-- ホスティング: 非root nginx container。Caddyが`/blog*`をcontainerの8080へrouteする
+- ホスティング: 非root nginx container。Caddyが`/blog*`をcontainerの8080へrouteする。nginxは`absolute_redirect off`でLocationを相対パスにする
 - 本番build: `Dockerfile`で`/out/blog`へ生成し、nginxのdocument rootへcopyする
 - healthcheck: `/healthz`
 - テーマ: `layouts/`と`assets/`にある自前テーマ
