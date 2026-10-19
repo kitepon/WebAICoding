@@ -44,5 +44,6 @@
   "aishell-build-all-proposed-tools": "全部作って、測り直した",
   "lattice-parallel-agents": "AIが嘘をつかなくなった",
   "peertable": "指揮官を置かず回した",
-  "what-is-ci": "CIって何？"
+  "what-is-ci": "CIって何？",
+  "approval-box-release": "決裁をスマホに集めます"
 }
