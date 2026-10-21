@@ -46,5 +46,6 @@
   "peertable": "指揮官を置かず回した",
   "what-is-ci": "CIって何？",
   "approval-box-release": "決裁をスマホに集めます",
-  "reminderbot-release": "サーバーをまたいで予定をまとめます"
+  "reminderbot-release": "サーバーをまたいで予定をまとめます",
+  "bellteam-release": "AIのチームと働くBellTeamを作りました"
 }
