@@ -70,11 +70,11 @@
     "canonicalUrl": "https://kitepon.dev/blog/post/aiterm-release/"
   },
   "approval-box-release": {
-    "status": "posting",
-    "sourceKey": "approval-box-release",
+    "status": "published",
+    "url": "https://dev.to/quolu/ai-questions-were-scattered-everywhere-so-i-built-approval-box-to-collect-approvals-on-my-phone-4ig4",
+    "id": 4886387,
     "canonicalUrl": "https://kitepon.dev/blog/post/approval-box-release/",
-    "reservationToken": "39531978874:1",
-    "reservedAt": "2026-10-21T02:15:31.873Z"
+    "pending": []
   },
   "bc250-to-ms-a2": {
     "url": "https://dev.to/quolu/how-i-completed-my-home-server-hardware-selection-and-migration-in-one-day-using-claude-ibk",
