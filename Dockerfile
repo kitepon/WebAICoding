@@ -34,6 +34,13 @@ RUN hugo --minify --destination /out/blog
 
 FROM nginx:1.29-alpine
 
+# SEC-021: emSign ECC Root CA G3 の信頼を除いた ca-certificates（20261020-r0 以上）へ上げる。
+# 基底imageの更新を待たずに上げ、版が足りない時やG3が残る時はbuildを止める。
+RUN apk upgrade --no-cache ca-certificates ca-certificates-bundle \
+    && bundle="$(apk info -v ca-certificates-bundle | sed -n 's/^ca-certificates-bundle-//p')" \
+    && [ "$(apk version -t "$bundle" 20261020-r0)" != "<" ] \
+    && [ ! -e /usr/share/ca-certificates/mozilla/emSign_ECC_Root_CA_-_G3.crt ]
+
 COPY deploy/nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /out /usr/share/nginx/html
 
