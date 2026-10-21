@@ -69,6 +69,13 @@
     "pending": [],
     "canonicalUrl": "https://kitepon.dev/blog/post/aiterm-release/"
   },
+  "approval-box-release": {
+    "status": "posting",
+    "sourceKey": "approval-box-release",
+    "canonicalUrl": "https://kitepon.dev/blog/post/approval-box-release/",
+    "reservationToken": "39531978874:1",
+    "reservedAt": "2026-10-21T02:15:31.873Z"
+  },
   "bc250-to-ms-a2": {
     "url": "https://dev.to/quolu/how-i-completed-my-home-server-hardware-selection-and-migration-in-one-day-using-claude-ibk",
     "id": 3878077,
