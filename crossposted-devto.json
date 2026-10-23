@@ -82,6 +82,13 @@
     "pending": [],
     "canonicalUrl": "https://kitepon.dev/blog/post/bc250-to-ms-a2/"
   },
+  "bellteam-release": {
+    "status": "posting",
+    "sourceKey": "bellteam-release",
+    "canonicalUrl": "https://kitepon.dev/blog/post/bellteam-release/",
+    "reservationToken": "39888555608:1",
+    "reservedAt": "2026-10-23T02:15:33.268Z"
+  },
   "bughub-aggregation": {
     "status": "published",
     "url": "https://dev.to/quolu/how-i-consolidated-bug-reports-from-four-apps-and-let-ai-fix-them-in-parallel-1501",
