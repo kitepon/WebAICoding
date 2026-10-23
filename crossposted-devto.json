@@ -83,11 +83,11 @@
     "canonicalUrl": "https://kitepon.dev/blog/post/bc250-to-ms-a2/"
   },
   "bellteam-release": {
-    "status": "posting",
-    "sourceKey": "bellteam-release",
+    "status": "published",
+    "url": "https://dev.to/quolu/i-created-bellteam-to-work-with-an-ai-team-by-gathering-the-tools-ive-built-fad",
+    "id": 4902242,
     "canonicalUrl": "https://kitepon.dev/blog/post/bellteam-release/",
-    "reservationToken": "39888555608:1",
-    "reservedAt": "2026-10-23T02:15:33.268Z"
+    "pending": []
   },
   "bughub-aggregation": {
     "status": "published",
