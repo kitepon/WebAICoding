@@ -22,38 +22,20 @@
 ## 本番更新
 
 `main`の検査対象pathへのpushは`.github/workflows/validate.yml`の検証だけを起動し、自動デプロイはしない。
-本番は検証成功後、運用側で次の順序を守って更新する。
-
-1. 本番repoがcleanな`main`であることを確認し、`git pull --ff-only`で対象commitを取得する
-2. 対象commitが`origin/main`の祖先であることを確認する
-3. commit SHAを`KITEPON_BLOG_TAG`へ渡して`blog` serviceをbuildする
-4. 同じtagで`blog` serviceを再作成し、containerが`healthy`になるまで確認する
-5. `/healthz`、blog index、変更対象ページをLANと公開URLの順でsmokeする
-
-imageは`kitepon-blog:<commit SHA>`で追跡し、`latest`だけを本番反映の根拠にしない。
-本番ホストでは次の形で実行する。
+本番は検証成功後、本番ホストで次の1本から更新する。手で`docker compose up`しない。
 
 ```bash
-cd /home/kite/Developer/WebAICoding
-git pull --ff-only origin main
-blog_release_sha="$(git rev-parse HEAD)"
-git merge-base --is-ancestor "$blog_release_sha" origin/main
-sudo -n env KITEPON_BLOG_TAG="$blog_release_sha" docker compose build blog
-sudo -n env KITEPON_BLOG_TAG="$blog_release_sha" docker compose up -d blog
-sudo -n docker inspect --format '{{.Config.Image}} {{.State.Health.Status}}' kitepon-blog
+/home/kite/Developer/RootSitePromotion/scripts/deploy-release.sh blog https://kitepon.dev/blog/post/<slug>/
 ```
 
-更新前に直前tagを記録する。
+cleanな`main`の`git pull --ff-only`、commit SHAでのbuildと再作成、healthyの待機、`/healthz`・blog index・指定ページのLANと公開のsmokeまで進み、
+全部通った時だけ古い`kitepon-blog` imageを消す。imageは`kitepon-blog:<commit SHA>`で追跡し、`latest`だけを本番反映の根拠にしない。
+入口の仕様と残すimageの正本は、RootSitePromotionの`docs/main-server-deployment.md`「配備の入口とimageの後片付け」とする。
+
+rollbackは入口が表示した直前のimageのtagで再作成し、同じhealth／公開smokeを行う。この手順では後片付けは走らない。
 
 ```bash
-blog_previous_image="$(sudo -n docker inspect --format '{{.Config.Image}}' kitepon-blog)"
-blog_previous_sha="${blog_previous_image#kitepon-blog:}"
-sudo -n docker image inspect "kitepon-blog:$blog_previous_sha"
-```
-
-rollback時は記録した値を使い、次の形で再作成して同じhealth／公開smokeを行う。
-
-```bash
+blog_previous_sha=<入口が表示した直前のimageのcommit SHA>
 sudo -n env KITEPON_BLOG_TAG="$blog_previous_sha" docker compose up -d --no-build blog
 sudo -n docker inspect --format '{{.Config.Image}} {{.State.Health.Status}}' kitepon-blog
 ```
