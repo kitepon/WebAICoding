@@ -42,10 +42,10 @@ Articles live as Markdown under `content/post/`. Every push to `main` triggers G
 
 ```mermaid
 flowchart LR
-    A["Write Markdown<br/>content/post/&lt;slug&gt;/index.md"] -->|git push main| B["GitHub Actions<br/>validate.yml"]
+    A["Write Markdown<br/>content/post/{slug}/index.md"] -->|git push main| B["GitHub Actions<br/>validate.yml"]
     B --> C["Content checks<br/>Hugo production build"]
     C -->|green main commit| D["main-server<br/>deploy-release.sh blog"]
-    D --> E["fast-forward main<br/>build kitepon-blog:&lt;SHA&gt;<br/>Hugo → nginx"]
+    D --> E["fast-forward main<br/>build kitepon-blog:{SHA}<br/>Hugo → nginx"]
     E -->|build fails| X["Stop before the switch (exit 1)<br/>remove nothing"]
     E --> F["Recreate container<br/>wait for healthy"]
     F -->|never healthy| Y["Stop (exit 1), remove nothing<br/>the switch may have happened<br/>check running image, health and public site<br/>roll back if broken"]

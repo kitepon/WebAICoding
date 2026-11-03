@@ -42,10 +42,10 @@
 
 ```mermaid
 flowchart LR
-    A["記事を書く<br/>content/post/&lt;slug&gt;/index.md"] -->|git push main| B["GitHub Actions<br/>validate.yml"]
+    A["記事を書く<br/>content/post/{slug}/index.md"] -->|git push main| B["GitHub Actions<br/>validate.yml"]
     B --> C["content検査<br/>Hugo本番build"]
     C -->|greenのmain commit| D["main-server<br/>deploy-release.sh blog"]
-    D --> E["mainをfast-forward<br/>kitepon-blog:&lt;SHA&gt; をbuild<br/>Hugo → nginx"]
+    D --> E["mainをfast-forward<br/>kitepon-blog:{SHA} をbuild<br/>Hugo → nginx"]
     E -->|build失敗| X["切替前に止まる（終了1）<br/>何も消さない"]
     E --> F["containerを再作成<br/>healthyを待つ"]
     F -->|healthyにならない| Y["止まる（終了1）・何も消さない<br/>切替が進んだ可能性あり<br/>稼働中のimage・healthと公開を確かめ<br/>壊れていればrollback"]
