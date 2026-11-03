@@ -28,6 +28,7 @@ The legacy `blog.kitepon.dev` hostname permanently redirects to the live path.
 - `tools/cover/`: Playwright-based cover image generator.
 - `tools/zenn-sync/`: Blog-to-Zenn synchronization tool.
 - `.github/workflows/`: GitHub Actions for content validation and dev.to crossposting.
+- `Dockerfile`, `compose.yaml`, `deploy/nginx.conf`: Production image, the `kitepon-blog` container and its nginx routing. Production is updated only through the deploy entry in [docs/site-operations.md](site-operations.md#本番更新), which also covers exit codes, the unknown-result case and rollback. A green validation run never deploys.
 - `.agents/skills/`: Shared project skills used by supported agents.
 
 ## Verification

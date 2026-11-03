@@ -40,6 +40,32 @@ sudo -n env KITEPON_BLOG_TAG="$blog_previous_sha" docker compose up -d --no-buil
 sudo -n docker inspect --format '{{.Config.Image}} {{.State.Health.Status}}' kitepon-blog
 ```
 
+入口の結果ごとの扱い（終了コードの定義は上記の正本による）:
+
+| 結果 | 本番の状態 | 次の作業 |
+|---|---|---|
+| 0 | 正常完了。古いimageは残す規則に従って整理した（初回や同じtagの再配備など、消さない場合も含む） | 終わり |
+| 1（build失敗） | 切替前に止まった。何も消していない | 原因を直して、入口からやり直す |
+| 1（health・smokeの失敗） | 何も消していない。切替が進んだ可能性がある | `docker inspect`で稼働中のimageとhealthを、公開URLで表示を確かめる。公開が壊れていれば上のrollback |
+| 3（配備は成功、後片付けだけ未完。保護の一覧が読めなかった時も含む） | 配備は成功 | `deploy-release.sh --cleanup-plan blog <直前のimage>`（読み取りだけ）で残りを確かめる |
+| 結果不明（SSH切断などで終了コードを受け取れない） | 結果不明のまま扱う | 下の注を参照 |
+
+結果不明の扱いは、公開契約の明文ではない。ヤン（配備担当）の運用判断である。
+`docker inspect`で見た稼働中のimageとhealth、公開URLの応答は、今の状態を示すだけで、その実行がどう終わったかは分からない。
+新しいSHA・healthy・200がそろっていても、0と3は見分けられない。
+そのため、終了コードを後から決めない。結果不明と、観測した今の状態を並べて記録する。
+その実行の結果の記録が確かめられるまで、再実行と後片付けはしない。確かめるのは配備担当で、通常の経路を使う。
+ただし公開が壊れていると観測した時は、その実行の結果とは切り離して、上のrollbackで公開を戻してよい。戻しても、その実行の結果は不明のまま記録する。
+
+このrepoの中で配備に関わるファイル:
+
+- `Dockerfile`: Hugoのbuildとnginx image。`KITEPON_RELEASE`にcommit SHAが入る。HEALTHCHECKは`/healthz`
+- `compose.yaml`: service `blog`、container `kitepon-blog`、image `kitepon-blog:${KITEPON_BLOG_TAG}`、LAN `192.168.1.2:18851`、Caddyと共有する外部network
+- `deploy/nginx.conf`: `/healthz`、`/blog`の相対転送、assetのcache
+- `.github/workflows/validate.yml`: 検査だけ。本番には触らない
+
+入口の中身・状態ファイル（最後の成功の記録）・Caddyの設定はRootSitePromotionの所有で、このrepoでは上記の公開契約だけを参照する。
+
 ## レイアウト
 
 - `layouts/_default/baseof.html`: head、上部バー、フッター、GoatCounter

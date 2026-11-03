@@ -44,11 +44,18 @@
 flowchart LR
     A["記事を書く<br/>content/post/&lt;slug&gt;/index.md"] -->|git push main| B["GitHub Actions<br/>validate.yml"]
     B --> C["content検査<br/>Hugo本番build"]
-    C -->|greenのmain commit| D["本番更新<br/>mainをfast-forward + SHA tag"]
-    D --> E["Docker multi-stage build<br/>Hugo → nginx"]
-    E --> F["Caddy /blog* routing"]
-    F --> G(["kitepon.dev/blog/"])
+    C -->|greenのmain commit| D["main-server<br/>deploy-release.sh blog"]
+    D --> E["mainをfast-forward<br/>kitepon-blog:&lt;SHA&gt; をbuild<br/>Hugo → nginx"]
+    E -->|build失敗| X["切替前に止まる（終了1）<br/>何も消さない"]
+    E --> F["containerを再作成<br/>healthyを待つ"]
+    F -->|healthyにならない| Y["止まる（終了1）・何も消さない<br/>切替が進んだ可能性あり<br/>稼働中のimage・healthと公開を確かめ<br/>壊れていればrollback"]
+    F --> G["LANと公開のsmoke<br/>/healthz・/blog/・記事URL"]
+    G -->|どれか失敗| Y
+    G -->|全部通過| H["残す規則に従って古いimageを整理<br/>稼働中・直前・最後の成功は残す"]
+    H --> I(["kitepon.dev/blog/<br/>Caddy /blog* 経由"])
 ```
+
+CIが成功しても配備はされません。本番が変わるのは上の配備の入口からだけです。終了コード、結果が分からない時の扱い、rollbackは [docs/site-operations.md](docs/site-operations.md#本番更新) にあります。
 
 `draft: false` の記事だけが本番に公開されます。
 

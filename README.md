@@ -44,11 +44,18 @@ Articles live as Markdown under `content/post/`. Every push to `main` triggers G
 flowchart LR
     A["Write Markdown<br/>content/post/&lt;slug&gt;/index.md"] -->|git push main| B["GitHub Actions<br/>validate.yml"]
     B --> C["Content checks<br/>Hugo production build"]
-    C -->|green main commit| D["Production update<br/>fast-forward main + SHA tag"]
-    D --> E["Docker multi-stage build<br/>Hugo → nginx"]
-    E --> F["Caddy /blog* routing"]
-    F --> G(["kitepon.dev/blog/"])
+    C -->|green main commit| D["main-server<br/>deploy-release.sh blog"]
+    D --> E["fast-forward main<br/>build kitepon-blog:&lt;SHA&gt;<br/>Hugo → nginx"]
+    E -->|build fails| X["Stop before the switch (exit 1)<br/>remove nothing"]
+    E --> F["Recreate container<br/>wait for healthy"]
+    F -->|never healthy| Y["Stop (exit 1), remove nothing<br/>the switch may have happened<br/>check running image, health and public site<br/>roll back if broken"]
+    F --> G["LAN + public smoke<br/>/healthz, /blog/, post URL"]
+    G -->|any check fails| Y
+    G -->|all pass| H["Clean up older images by the keep rules<br/>keep running / previous / last good"]
+    H --> I(["kitepon.dev/blog/<br/>via Caddy /blog*"])
 ```
+
+A green CI run does not deploy anything; production changes only through the deploy entry above. Exit codes, the unknown-result case and rollback are in [docs/site-operations.md](docs/site-operations.md#本番更新).
 
 Only articles with `draft: false` are published.
 
