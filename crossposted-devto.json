@@ -232,11 +232,11 @@
     "pending": []
   },
   "ol-remotewindow-release": {
-    "status": "posting",
-    "sourceKey": "ol-remotewindow-release",
+    "status": "published",
+    "url": "https://dev.to/quolu/i-built-ol-remotewindow-to-operate-a-single-selected-pc-window-from-iphone-and-ipad-58a7",
+    "id": 5070271,
     "canonicalUrl": "https://kitepon.dev/blog/post/ol-remotewindow-release/",
-    "reservationToken": "44460585939:1",
-    "reservedAt": "2026-11-19T04:46:37.899Z"
+    "pending": []
   },
   "oltranslator-app": {
     "url": "https://dev.to/quolu/oltranslator-a-real-time-screen-translation-app-for-windows-1l52",
